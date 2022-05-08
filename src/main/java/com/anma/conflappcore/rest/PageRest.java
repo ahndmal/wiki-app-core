@@ -4,6 +4,7 @@ import com.anma.conflappcore.models.db.Page;
 import com.anma.conflappcore.repo.PageRepo;
 import com.anma.conflappcore.rest.req.CreatePageReq;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +35,8 @@ public class PageRest {
     }
 
     @PutMapping("/{id}")
-    public PageDTO savePage(@PathVariable long id, CreatePageReq dto) {
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public PageDTO savePage(@PathVariable long id, @RequestBody CreatePageReq dto) {
         var edited = pageRepo.getById(id);
         edited.setTitle(dto.title());
         edited.setBody(dto.body());

@@ -3,9 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Page</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <h2 th:text="${page.title}"></h2>
-    <div th:text="${page.body}"></div>
+<!--    <div th:text="${page.body}"></div>-->
+    <button id="edit-page" class="button">Edit</button>
+    <div class="root"></div>
+
+    <script th:inline="javascript">
+        const pageId = [[${page.id}]]
+        const root = document.querySelector('.root');
+        root.innerHTML = [[${page.body}]]
+    </script>
+    <script>
+        const editBtn = document.querySelector('#edit-page');
+        editBtn.addEventListener('click', evt => {
+           evt.preventDefault();
+           window.location.href = `editpage/${pageId}`;
+        });
+    </script>
 </body>
 </html>

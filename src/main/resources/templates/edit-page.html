@@ -11,38 +11,36 @@
             font-size: 2rem;
         }
     </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div>
     <input class="page-title" type="text" name="page-title" id="page-title" th:value="${page.title}">
 </div>
-
 <textarea id="default-editor">
         <p th:text="${page.body}">   </p>
     </textarea>
-<button id="save-changes">Save</button>
-<script th:inline="javascript">
-    // const pageId = [[$pageId]]
-    const pageId = parseInt(window.location.pathname.replace("/editpage/", ""));
+<button class="button" id="save-changes">Save</button>
+<button class="button" id="cancel-changes">Close</button>
 
+<script>
+    const pageId = Number.parseInt(location.pathname.replace("/editpage/", ""));
     tinymce.init({
         selector: 'textarea',
         plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
         toolbar_mode: 'floating',
-        plugins: 'save',
-        toolbar: 'save',
+        plugins: 'save table lists image media',
+        toolbar: 'save table',
         save_onsavecallback: (e) => {
-            const pageTitle = document.querySelector('#page-title').textContent;
+            const pageTitle = document.querySelector('#page-title').value;
             let cnt = e.getContent();
-            let page = {
-                body: cnt,
-                title: pageTitle
-            }
-            fetch(`/rest/api/pages/${pageId}`, {
+            const requestOptions = {
                 method: 'PUT',
-                body: page
-            })
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({body: cnt, title: pageTitle})
+            };
+            fetch(`/rest/api/pages/${pageId}`, requestOptions)
                 .then(res => res.json())
                 .then(res => console.info(res))
         }
@@ -50,9 +48,15 @@
     // const btn = document.querySelector("#save-changes");
     // btn.addEventListener('click', evt => {
     //     evt.preventDefault();
-        // let content = document.querySelector('textarea').innerHTML;
+    // let content = document.querySelector('textarea').innerHTML;
     // });
 </script>
-
+<script>
+    const closeBtn = document.querySelector('#cancel-changes');
+    closeBtn.addEventListener('click', evt => {
+       evt.preventDefault();
+       window.location.href = `/viewpage?pageId=${pageId}`
+    });
+</script>
 </body>
 </html>
