@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Page</title>
+    <script src="https://cdn.tiny.cloud/1/rrd8a74ls6cc8altyftsg1x991f52ycgwop59fezyu9oa3qn/tinymce/6/tinymce.min.js"
+            referrerpolicy="origin">
+    </script>
+    <style>
+        .page-title {
+            font-size: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+    <input class="page-title" type="text" name="page-title" id="page-title" th:value="${page.title}">
+</div>
+
+<textarea id="default-editor">
+        <p th:text="${page.body}">   </p>
+    </textarea>
+<button id="save-changes">Save</button>
+<script th:inline="javascript">
+    // const pageId = [[$pageId]]
+    const pageId = parseInt(window.location.pathname.replace("/editpage/", ""));
+
+    tinymce.init({
+        selector: 'textarea',
+        plugins: 'advlist autolink lists link image charmap preview anchor pagebreak',
+        toolbar_mode: 'floating',
+        plugins: 'save',
+        toolbar: 'save',
+        save_onsavecallback: (e) => {
+            const pageTitle = document.querySelector('#page-title').textContent;
+            let cnt = e.getContent();
+            let page = {
+                body: cnt,
+                title: pageTitle
+            }
+            fetch(`/rest/api/pages/${pageId}`, {
+                method: 'PUT',
+                body: page
+            })
+                .then(res => res.json())
+                .then(res => console.info(res))
+        }
+    });
+    // const btn = document.querySelector("#save-changes");
+    // btn.addEventListener('click', evt => {
+    //     evt.preventDefault();
+        // let content = document.querySelector('textarea').innerHTML;
+    // });
+</script>
+
+</body>
+</html>
