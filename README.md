@@ -7,8 +7,11 @@ Primitive exaple of Confluencelike wiki system based on:
 - Quarkus
 - RSocket / WebSockets
 - ReactJS
-- 
+
+
 ![Screenshot from 2022-05-08 17-56-10](https://user-images.githubusercontent.com/36703491/167308313-ae570b2d-64d6-4e9d-90f3-d49cad50e0e5.png)
+
+![Screenshot from 2022-05-08 20-29-50](https://user-images.githubusercontent.com/36703491/167308573-2c182f0d-3d17-4784-8a88-677e26a9bf34.png)
 
 
 ```sql
