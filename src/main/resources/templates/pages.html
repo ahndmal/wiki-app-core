@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<nav class="nav">
+    <div class="nav-elem"><a href="/">Home</a></div>
+    <div class="nav-elem"><a href="/spaces">Spaces</a></div>
+    <div class="nav-elem"><a href="/pages/all">Pages</a></div>
+    <div class="nav-elem"><a href="/blogs">Blogs</a></div>
+    <div class="nav-elem"><a href="/profile">Profile</a></div>
+</nav>
+    <h2>Pages</h2>
+    <div class="root"></div>
+    <th:block>
+        <div class="pages-root" th:each="page : ${pages}">
+            <div class="page">
+                <p>
+                    <a th:href="@{'/viewpage?pageId=' + ${page.id}}" th:text="${page.title}">
+
+                    </a>
+                </p>
+            </div>
+        </div>
+    </th:block>
+</body>
+</html>

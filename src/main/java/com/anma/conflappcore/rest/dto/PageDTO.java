@@ -1,4 +1,4 @@
-package com.anma.conflappcore.rest;
+package com.anma.conflappcore.rest.dto;
 
 public record PageDTO(
         long id,

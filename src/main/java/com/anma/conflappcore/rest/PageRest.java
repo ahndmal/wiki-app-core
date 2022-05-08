@@ -2,6 +2,7 @@ package com.anma.conflappcore.rest;
 
 import com.anma.conflappcore.models.db.Page;
 import com.anma.conflappcore.repo.PageRepo;
+import com.anma.conflappcore.rest.dto.PageDTO;
 import com.anma.conflappcore.rest.req.CreatePageReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

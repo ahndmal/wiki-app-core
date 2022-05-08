@@ -48,4 +48,10 @@ public class PageControllers {
         return "edit-page";
     }
 
+    @GetMapping("/pages/all")
+    public String getPages(Model model) {
+        model.addAttribute("pages", pageRepo.findAll());
+        return "pages";
+    }
+
 }

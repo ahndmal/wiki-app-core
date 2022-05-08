@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Spaces</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<nav class="nav">
+    <div class="nav-elem"><a href="/">Home</a></div>
+    <div class="nav-elem"><a href="/spaces">Spaces</a></div>
+    <div class="nav-elem"><a href="/pages/all">Pages</a></div>
+    <div class="nav-elem"><a href="/blogs">Blogs</a></div>
+    <div class="nav-elem"><a href="/profile">Profile</a></div>
+</nav>
+    <h2>Spaces</h2>
+    <div class="root">
+        <div class="spaces" id="spaces"></div>
+        <div th:each="space : ${spaces}">
+            <div>
+                <p><a href="" th:href="@{/spaces/${spaceId}(spaceId=${space.id})}" th:text="${space.title}"></a></p>
+            </div>
+        </div>
+    </div>
+
+<script type="text/javascript">
+    const root = document.querySelector('.root');
+    const spacesDiv = document.querySelector('#spaces');
+
+
+</script>
+
+</body>
+</html>
