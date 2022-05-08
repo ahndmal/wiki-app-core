@@ -14,14 +14,13 @@
     <div class="nav-elem"><a href="/comments">Comments</a></div>
     <div class="nav-elem"><a href="/profile">Profile</a></div>
 </nav>
-    <h2>Pages</h2>
+    <h2>Comments</h2>
     <div class="root">
         <th:block>
-            <div class="pages-root" th:each="page : ${pages}">
+            <div class="comments-root" th:each="c : ${comments}">
                 <div class="page">
                     <p>
-                        <a th:href="@{'/viewpage?pageId=' + ${page.id}}" th:text="${page.title}">
-
+                        <a th:href="@{'/comment/' + ${c.parentId} + '/' + ${c.id} }" th:text="${c.body}">
                         </a>
                     </p>
                 </div>

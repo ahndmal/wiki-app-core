@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: row;
     color: white;
-    background-color: #4646a4;
+    background-color: #2f2f3b;
     margin: 10px;
 }
 
@@ -31,7 +31,7 @@
 }
 
 a {
-    color: green;
+    color: #4b77ea;
 }
 
 table th {
@@ -46,4 +46,9 @@ table th {
 
 .pages-root {
     margin: 15px;
+}
+
+code {
+    font-family: "Droid Sans Fallback";
+    font-size: 0.6rem;
 }

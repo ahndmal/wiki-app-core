@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Profile</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-</head>
-<body>
-<nav class="nav">
+<nav th:fragment="header" class="nav">
     <div class="nav-elem"><a href="/">Home</a></div>
     <div class="nav-elem"><a href="/spaces">Spaces</a></div>
     <div class="nav-elem"><a href="/pages/all">Pages</a></div>
@@ -14,9 +6,3 @@
     <div class="nav-elem"><a href="/comments">Comments</a></div>
     <div class="nav-elem"><a href="/profile">Profile</a></div>
 </nav>
-    <h2>Profile</h2>
-    <div class="root"></div>
-
-
-</body>
-</html>

@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 public class Boot implements CommandLineRunner {
 
@@ -28,14 +30,20 @@ public class Boot implements CommandLineRunner {
 
     private void loadData() {
         int count = 1;
-        for (int i = 100; i < 150; i++) {
-            log.info(">> Creating comment...");
+        for (int i = 1; i < 20; i++) {
             var comment = new Comment();
             comment.setId(i);
             comment.setTitle(String.format("Page %d", RandomUtils.getRandomNum(1, 100)));
+            comment.setBody(RandomUtils.getRandomText(50));
+            comment.setCreatedAt(LocalDateTime.now());
+            comment.setLastEdited(LocalDateTime.now());
+            comment.setParentId(1);
             comment.setUserId(RandomUtils.getRandomNum(1, 100));
-            commentRepo.save(comment);
-            count ++;
+            Comment save = commentRepo.save(comment);
+            if (save.getId() != 0) {
+                count ++;
+                log.info(">> comment created");
+            }
         }
         log.info(count + "  Comments created!");
     }
