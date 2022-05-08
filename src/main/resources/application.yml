@@ -1,0 +1,16 @@
+server:
+  port: 7000
+spring:
+  application:
+    name: wiki-core
+  datasource:
+    url: jdbc:postgresql://167.235.52.214/wiki1
+    username: dev
+    password: ${DB_PASS}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
