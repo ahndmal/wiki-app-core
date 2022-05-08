@@ -7,9 +7,9 @@ Primitive exaple of Confluencelike wiki system based on:
 - Quarkus
 - RSocket / WebSockets
 - ReactJS
+- 
+![Screenshot from 2022-05-08 17-56-10](https://user-images.githubusercontent.com/36703491/167308313-ae570b2d-64d6-4e9d-90f3-d49cad50e0e5.png)
 
-
-![](../../../Pictures/Screenshot from 2022-05-08 17-56-10.png)
 
 ```sql
 create table pages(id serial PRIMARY KEY, title varchar, body varchar, space_key varchar);
