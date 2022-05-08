@@ -1,5 +1,6 @@
 package com.anma.conflappcore.contr;
 
+import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.repo.PageRepo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class PageControllers {
 
     private final PageRepo pageRepo;
+    private final CommentRepo commentRepo;
 
-    public PageControllers(PageRepo pageRepo) {
+    public PageControllers(PageRepo pageRepo, CommentRepo commentRepo) {
         this.pageRepo = pageRepo;
+        this.commentRepo = commentRepo;
     }
 
     @GetMapping("/")
@@ -34,6 +37,7 @@ public class PageControllers {
 
         var page = pageRepo.findById(pageId).get();
         model.addAttribute("page", page);
+        model.addAttribute("comments", commentRepo.findCommentByParentId(pageId));
 
         return "page";
     }
@@ -43,7 +47,7 @@ public class PageControllers {
 
         var page = pageRepo.findById(pageId).get();
         model.addAttribute("page", page);
-        model.addAttribute("$pageId", pageId);
+        model.addAttribute("pageId", pageId);
 
         return "edit-page";
     }

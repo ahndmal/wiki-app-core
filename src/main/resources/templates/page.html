@@ -14,22 +14,39 @@
     <div class="nav-elem"><a href="/comments">Comments</a></div>
     <div class="nav-elem"><a href="/profile">Profile</a></div>
 </nav>
-    <h2 th:text="${page.title}"></h2>
+<h2 th:text="${page.title}"></h2>
 <!--    <div th:text="${page.body}"></div>-->
-    <button id="edit-page" class="button">Edit</button>
-    <div class="root"></div>
+<button id="edit-page" class="button">Edit</button>
+<div class="root">
 
-    <script th:inline="javascript">
-        const pageId = [[${page.id}]]
-        const root = document.querySelector('.root');
-        root.innerHTML = [[${page.body}]]
-    </script>
-    <script>
-        const editBtn = document.querySelector('#edit-page');
-        editBtn.addEventListener('click', evt => {
-           evt.preventDefault();
-           window.location.href = `editpage/${pageId}`;
-        });
-    </script>
+
+</div>
+
+<div class="comments">
+    <th:block>
+        <div class="comment" th:each="c : ${comments}">
+            <div>
+                <p th:text="${c.createdAt}"></p>
+                <p th:text="${c.lastEdited}"></p>
+            </div>
+            <div>
+                <p th:text="${c.body}"></p>
+            </div>
+        </div>
+    </th:block>
+</div>
+
+<script th:inline="javascript">
+    const pageId = [[${page.id}]]
+    const root = document.querySelector('.root');
+    root.innerHTML = [[${page.body}]]
+</script>
+<script>
+    const editBtn = document.querySelector('#edit-page');
+    editBtn.addEventListener('click', evt => {
+        evt.preventDefault();
+        window.location.href = `editpage/${pageId}`;
+    });
+</script>
 </body>
 </html>
