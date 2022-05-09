@@ -30,8 +30,14 @@
     margin: 3px;
 }
 
+.nav-elem a {
+    color: white;
+    padding: 3px;
+    margin: 3px;
+}
+
 a {
-    color: #4b77ea;
+    color: #4973c0;
 }
 
 table th {
@@ -56,4 +62,18 @@ code {
 .comment {
     display: flex;
     flex-direction: row;
+}
+
+.comment-icon {
+    padding: 4px;
+    margin: 3px;
+}
+
+.comm-info {
+    flex-direction: column;
+}
+
+#content {
+    padding: 15px !important;
+    margin: 15px !important;
 }

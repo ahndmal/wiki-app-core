@@ -1,6 +1,7 @@
 package com.anma.conflappcore.models.db;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name ="spaces")
@@ -13,6 +14,13 @@ public class Space {
     private String category;
     @Column(name = "space_key")
     private String spaceKey;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @Column(name = "last_updated")
+    private LocalDateTime lastUpdated;
+    @Column(name = "author_id")
+    private long authorId;
 
     public long getId() {
         return id;
@@ -44,5 +52,29 @@ public class Space {
 
     public void setSpaceKey(String spaceKey) {
         this.spaceKey = spaceKey;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setLastUpdated(LocalDateTime lastUpdated) {
+        this.lastUpdated = lastUpdated;
+    }
+
+    public long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(long authorId) {
+        this.authorId = authorId;
     }
 }

@@ -10,4 +10,6 @@ public interface SpaceRepo extends JpaRepository<Space, Long> {
     Space findByTitle(String pageTitle);
 
     Space findByCategory(String category);
+
+    Space findBySpaceKey(String key);
 }
