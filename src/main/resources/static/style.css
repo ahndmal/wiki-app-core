@@ -77,3 +77,15 @@ code {
     padding: 15px !important;
     margin: 15px !important;
 }
+
+#add-comment-root {
+    /*display: none;*/
+}
+
+.hide {
+    display: none;
+}
+
+.comm-show {
+    display: block;
+}

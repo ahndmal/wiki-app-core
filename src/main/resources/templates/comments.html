@@ -21,6 +21,9 @@
 <h2>Comments</h2>
 <div class="root">
     <th:block>
+        <div>
+            <p th:text="'Comments # : ' + ${comments.size()}"></p>
+        </div>
         <div class="comments-root" th:each="c : ${comments}">
             <div class="comment">
                    <div class="comment-icon">

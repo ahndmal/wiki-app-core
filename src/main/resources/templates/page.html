@@ -25,10 +25,16 @@
     <div id="content">
 
     </div>
-
 </div>
 
 <div class="comments">
+    <h3>Comments</h3>
+    <button id="add-comment-btn" class="button" type="submit">Add</button>
+    <div id="add-comment-root" class="hide">
+        <textarea id="add-comment" name="add-comment"></textarea>
+        <br>
+        <button class="button" id="save-comment-btn">Save</button>
+    </div>
     <th:block>
         <div class="comment" th:each="c : ${comments}">
             <div class="comment-icon">
@@ -63,5 +69,31 @@
         window.location.href = `editpage/${pageId}`;
     });
 </script>
+<script>
+    const addCommBtn = document.querySelector('#add-comment-btn');
+    const saveCommBtn = document.querySelector('#save-comment-btn');
+    addCommBtn.addEventListener('click', evt => {
+       evt.preventDefault();
+       const addComment = document.querySelector('#add-comment-root');
+       addComment.className = 'comm-show';
+    });
+    saveCommBtn.addEventListener('click', evt => {
+        evt.preventDefault();
+        const commBody = document.querySelector('textarea#add-comment').value;
+        let reqOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                body: commBody,
+                parentId: pageId,
+                title: 'comment ' + new Date().toDateString()
+            })
+        }
+        fetch('/rest/api/comments', reqOptions)
+            .then(res => res.json())
+            .then(data => console.info(data))
+    });
+</script>
+
 </body>
 </html>
