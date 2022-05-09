@@ -92,6 +92,8 @@
         fetch('/rest/api/comments', reqOptions)
             .then(res => res.json())
             .then(data => console.info(data))
+        window.location.reload();
+
     });
 </script>
 

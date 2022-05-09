@@ -17,8 +17,8 @@
     <div class="nav-elem"><a href="/blogs">Blogs</a></div>
     <div class="nav-elem"><a href="/profile">Profile</a></div>
 </nav>
-    <h2>Spaces</h2>
     <div class="root">
+        <h2>Spaces</h2>
         <div class="spaces" id="spaces"></div>
         <div th:each="space : ${spaces}">
             <div>
@@ -30,7 +30,6 @@
 <script type="text/javascript">
     const root = document.querySelector('.root');
     const spacesDiv = document.querySelector('#spaces');
-
 
 </script>
 

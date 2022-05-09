@@ -4,6 +4,7 @@ public record SpaceDTO(
         long id,
         String title,
         String category,
-        String key
+        String key,
+        long authorId
 ) {
 }
