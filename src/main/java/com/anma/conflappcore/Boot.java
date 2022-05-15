@@ -13,6 +13,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.Random;
 
 @Component
 public class Boot implements CommandLineRunner {
@@ -32,21 +33,22 @@ public class Boot implements CommandLineRunner {
         // START
 
 //        createPages();
+//        createComments(621, 1000);
 
         // END
     }
 
-    private void createComments() {
+    private void createComments(int from, int to) {
         int count = 1;
-        for (int i = 1; i < 20; i++) {
+        for (int i = from; i < to; i++) {
             var comment = new Comment();
             comment.setId(i);
             comment.setTitle(String.format("Page %d", RandomUtils.getRandomNum(1, 100)));
-            comment.setBody(RandomUtils.getRandomText(50));
+            comment.setBody(RandomUtils.getRandomText(80));
             comment.setCreatedAt(LocalDateTime.now());
             comment.setLastEdited(LocalDateTime.now());
-            comment.setParentId(1);
-            comment.setUserId(RandomUtils.getRandomNum(1, 100));
+            comment.setParentId(new Random().nextInt(1,5));
+            comment.setUserId(RandomUtils.getRandomNum(1, 3));
             Comment save = commentRepo.save(comment);
             if (save.getId() != 0) {
                 count ++;

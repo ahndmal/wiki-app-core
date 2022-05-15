@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Page</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@atlassian/aui@8.6.0/dist/aui/aui-prototyping.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/1.15.4/sinon.js"></script>
+    <script src="https://unpkg.com/@atlassian/aui@8.6.0/dist/aui/aui-prototyping.js"></script>
+</head>
+<body>
+<nav class="nav">
+    <div class="nav-elem"><a href="/">Home</a></div>
+    <div class="nav-elem"><a href="/spaces">Spaces</a></div>
+    <div class="nav-elem"><a href="/pages/all">Pages</a></div>
+    <div class="nav-elem"><a href="/blogs">Blogs</a></div>
+    <div class="nav-elem"><a href="/comments">Comments</a></div>
+    <div class="nav-elem"><a href="/profile">Profile</a></div>
+</nav>
+<h2>Comments</h2>
+<div class="root">
+    <th:block>
+        <div>
+            <p th:text="'Comments # : ' + ${comments.size()}"></p>
+        </div>
+        <div class="comments-root" th:each="c : ${comments}">
+            <div class="comment">
+                   <div class="comment-icon">
+                        <span class="aui-avatar aui-avatar-medium">
+                        <span class="aui-avatar-inner">
+                            <img src="images/avatar-person.svg" alt="person"/>
+                        </span>
+                    </span>
+                   </div>
+                  <div class="comm-info">
+                      <p th:text="${c.createdAt}">
+
+                      </p>
+                      <p>
+                          <a th:href="@{'/comment/' + ${c.parentId} + '/' + ${c.id} }" th:text="${c.body}">
+                          </a>
+                      </p>
+                  </div>
+            </div>
+        </div>
+    </th:block>
+</div>
+
+<!--<script type="text/javascript">-->
+<!--    let socket = new WebSocket('ws://localhost:7000/comments');-->
+<!--    socket.addEventListener('open', ev => {-->
+<!--        socket.send('Hello Server!');-->
+<!--    });-->
+<!--    socket.addEventListener('message', (event) => {-->
+<!--        console.log('Message from server ', event.data);-->
+<!--    });-->
+
+<!--</script>-->
+
+<script>
+    let stompClient = null;
+    let connected = false;
+
+    function connect() {
+        let socket = new SockJS('/gss');
+        stompClient = Stomp.over(socket);
+        stompClient.connect({}, (frame) => {
+            connected = true;
+            console.log('Connected: ' + frame);
+            stompClient.subscribe('/topic/common', comment => {
+                showComment(JSON.parse(comment.body).content);
+            });
+        });
+    }
+
+    function disconnect() {
+        if (stompClient !== null) {
+            stompClient.disconnect();
+        }
+        connected = false;
+        console.log("Disconnected");
+    }
+
+    function sendComment(comment) {
+        stompClient.send("/app/comments", {}, JSON.stringify(comment));
+    }
+
+    function showComment(comment) {
+        console.log(comment)
+    }
+
+    connect();
+    sendComment({id: 1, body: 'some body...', createdAt: new Date().getTime(), authorId: 1})
+
+</script>
+
+</body>
+</html>

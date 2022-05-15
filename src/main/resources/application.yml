@@ -17,3 +17,6 @@ spring:
   thymeleaf:
     cache: false
     check-template: false
+grpc:
+  port: 6565
+  shutdownGrace: 30
