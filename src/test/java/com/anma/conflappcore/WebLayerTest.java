@@ -1,6 +1,6 @@
 package com.anma.conflappcore;
 
-import com.anma.conflappcore.contr.CommentControllers;
+import com.anma.conflappcore.rest.SpaceREST;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(CommentControllers.class)
+@WebMvcTest(SpaceREST.class)
 @AutoConfigureRestDocs(outputDir = "target/snippets")
 public class WebLayerTest {
 
