@@ -2,6 +2,8 @@ package com.anma.conflappcore.contr;
 
 import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.repo.PageRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PageControllers {
+    Logger LOG = LoggerFactory.getLogger(this.getClass().getName());
     private final PageRepo pageRepo;
     private final CommentRepo commentRepo;
 
@@ -20,6 +23,7 @@ public class PageControllers {
 
     @GetMapping("/")
     public String home() {
+        LOG.info("GET / home page");
         return "home";
     }
 

@@ -21,7 +21,10 @@
 <div class="root">
     <div class="spaces" id="spaces"></div>
     <div>
-        <p><a href="" th:href="'@{/spaces/' + ${space.spaceKey}" th:text="${space.title}"></a></p>
+        <p>
+<!--            <a href="" th:if="${space.spaceKey != null}" th:href="@{/spaces/spacKey(spaceKey=${space.spaceKey})}" th:text="${space.title}"></a>-->
+        </p>
+        <p th:text="${space.spaceKey}"></p>
     </div>
 </div>
 

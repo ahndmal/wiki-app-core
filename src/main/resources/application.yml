@@ -1,6 +1,11 @@
 server:
   port: 7000
 spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${SMTP_USER}
+    password: ${SMTP_PASS}
   application:
     name: wiki-core
   datasource:

@@ -23,7 +23,8 @@
         <div class="spaces" id="spaces"></div>
         <div th:each="space : ${spaces}">
             <div>
-                <p><a href="" th:href="'@{/spaces/' + ${space.id}" th:text="${space.title}"></a></p>
+        <!--                @{/order/{orderId}/details(orderId=${orderId})}-->
+                <p><a href="" th:href="@{/spaces/{spaceId}(spaceId=${space.id})}" th:text="${space.title}"></a></p>
             </div>
         </div>
     </div>

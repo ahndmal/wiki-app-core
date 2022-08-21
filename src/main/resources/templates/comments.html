@@ -34,9 +34,7 @@
                     </span>
                    </div>
                   <div class="comm-info">
-                      <p th:text="${c.createdAt}">
-
-                      </p>
+                      <p th:text="${c.createdAt}"></p>
                       <p>
                           <a th:href="@{'/comment/' + ${c.parentId} + '/' + ${c.id} }" th:text="${c.body}">
                           </a>

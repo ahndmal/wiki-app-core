@@ -16,11 +16,16 @@ public class PageGRService extends PageServiceGrpc.PageServiceImplBase  { //exte
 
     @Override
     public void getPage(PageRequest request, StreamObserver<PageResponse> responseObserver) {
-        PageResponse page = PageResponse.newBuilder()
-                .setBody("aaa")
-                .setId(1L)
+        var page = pageRepo.getById(request.getId());
+        PageResponse pageResp = PageResponse.newBuilder()
+                .setBody(page.getBody())
+                .setId(page.getId())
+                .setTitle(page.getTitle())
+                .setParentId(page.getParentId())
+                .setSpaceKey(page.getSpaceKey())
+                .setAuthorId(page.getAuthorId())
                 .build();
-        responseObserver.onNext(page);
+        responseObserver.onNext(pageResp);
         responseObserver.onCompleted();
     }
 

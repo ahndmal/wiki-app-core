@@ -16,6 +16,7 @@ message PageResponse {
   string title = 3;
   string spaceKey = 4;
   int64 parentId = 5;
+  int64 authorId = 6;
 }
 
 message CommentResponse {

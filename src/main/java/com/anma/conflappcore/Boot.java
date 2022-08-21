@@ -17,7 +17,6 @@ import java.util.Random;
 
 @Component
 public class Boot implements CommandLineRunner {
-
     private final Logger log = LoggerFactory.getLogger(Boot.class);
     private final CommentRepo commentRepo;
     private final PageRepo pageRepo;
@@ -32,8 +31,15 @@ public class Boot implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // START
 
-//        createPages();
+//        createPages(1, 100);
 //        createComments(621, 1000);
+
+
+        // set userId
+//        commentRepo.findAll().stream().map(c -> {
+//            c.setUserId(2);
+//            return commentRepo.save(c);
+//        });
 
         // END
     }
@@ -58,9 +64,8 @@ public class Boot implements CommandLineRunner {
         log.info(count + "  Comments created!");
     }
 
-    private void createPages() {
-        int count = 1;
-        for (int i = 207; i < 350; i++) {
+    private void createPages(int from, int to) {
+        for (int i = from; i < to; i++) {
             var page = new Page();
             page.setId(i);
             page.setTitle(String.format("Test Page %d", RandomUtils.getRandomNum(1, 100)));
@@ -68,13 +73,14 @@ public class Boot implements CommandLineRunner {
             page.setCreatedAt(LocalDateTime.now());
             page.setLastUpdated(LocalDateTime.now());
             page.setSpaceKey("DEV");
+            page.setParentId(0);
             page.setAuthorId(RandomUtils.getRandomNum(1, 5));
             var saved = pageRepo.save(page);
             if (saved.getId() != 0) {
-                count ++;
+                from ++;
                 log.info(">> page created");
             }
         }
-        log.info(count + "  pages created!");
+        log.info(from + "  pages created!");
     }
 }

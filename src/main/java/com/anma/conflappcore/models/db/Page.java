@@ -13,6 +13,8 @@ public class Page {
     private String title;
     private String body;
     private String spaceKey;
+    @Column(name = "parent_id")
+    private long parentId;
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "last_updated")
@@ -74,5 +76,13 @@ public class Page {
 
     public void setAuthorId(long authorId) {
         this.authorId = authorId;
+    }
+
+    public long getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(long parentId) {
+        this.parentId = parentId;
     }
 }
