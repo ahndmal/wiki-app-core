@@ -32,7 +32,13 @@ public class PageRest {
     @GetMapping("/{id}")
     public ContentWeb getPageById(@PathVariable long id) {
         Page page = pageRepo.getById(id);
-        var content = new ContentWeb(id, page.getTitle(), "page", page.getBody(), page.getSpaceKey());
+        var content = new ContentWeb(id, page.getTitle(),
+                "page",
+                page.getBody(),
+                page.getSpaceKey(),
+                String.valueOf(page.getId()),
+                page.getCreatedAt(),
+                page.getLastUpdated());
         return content;
     }
 
