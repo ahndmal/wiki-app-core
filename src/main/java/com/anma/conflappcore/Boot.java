@@ -34,7 +34,6 @@ public class Boot implements CommandLineRunner {
 //        createPages(1, 100);
 //        createComments(621, 1000);
 
-
         // set userId
 //        commentRepo.findAll().stream().map(c -> {
 //            c.setUserId(2);
@@ -53,7 +52,7 @@ public class Boot implements CommandLineRunner {
             comment.setBody(RandomUtils.getRandomText(80));
             comment.setCreatedAt(LocalDateTime.now());
             comment.setLastEdited(LocalDateTime.now());
-            comment.setParentId(new Random().nextInt(1,5));
+            comment.setParentId(new Random().nextInt(1, 5));
             comment.setUserId(RandomUtils.getRandomNum(1, 3));
             Comment save = commentRepo.save(comment);
             if (save.getId() != 0) {

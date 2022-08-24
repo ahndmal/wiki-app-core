@@ -1,4 +1,4 @@
-package com.anma.conflappcore.rest;
+package com.anma.conflappcore.rest.req;
 
 public record CreateCommentReq(
         String body,

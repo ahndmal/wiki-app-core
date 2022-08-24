@@ -1,10 +1,11 @@
-package com.anma.conflappcore.rest;
+package com.anma.conflappcore.rest.contr;
 
 import com.anma.conflappcore.models.db.Space;
 import com.anma.conflappcore.repo.SpaceRepo;
 import com.anma.conflappcore.rest.dto.SpaceDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -40,7 +41,7 @@ public class SpaceREST {
     public Space createSpace(SpaceDTO dto) {
         var space = new Space();
         space.setTitle(dto.title());
-        space.setSpaceKey(dto.category());
+        space.setSpaceKey(dto.key());
         space.setCategory(dto.category());
         return spaceRepo.save(space);
     }
@@ -63,5 +64,10 @@ public class SpaceREST {
                 savedSpace.getCategory(),
                 savedSpace.getAuthorId()
         );
+    }
+    @DeleteMapping("/{key}")
+    public ResponseEntity<?> deleteSpace(@PathVariable String key) {
+        spaceRepo.deleteBySpaceKey(key);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(String.format("%s space deleted", key));
     }
 }

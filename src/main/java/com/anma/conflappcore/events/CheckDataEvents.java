@@ -23,7 +23,7 @@ public class CheckDataEvents {
         this.publisher = publisher;
     }
 
-    @Scheduled(fixedRate = 10000L)
+    @Scheduled(fixedRate = 30000L)
     public void scheduleCOmmCheck() {
         int commentsSize = commentRepo.findAll().size();
         System.out.println("comments size is " + commentsSize);

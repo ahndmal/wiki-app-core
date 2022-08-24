@@ -1,4 +1,4 @@
-package com.anma.conflappcore.rest;
+package com.anma.conflappcore.rest.contr;
 
 public record CreateSpaceReq(
         String title,

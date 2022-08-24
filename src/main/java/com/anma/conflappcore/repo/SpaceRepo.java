@@ -13,4 +13,6 @@ public interface SpaceRepo extends JpaRepository<Space, Long> {
 
     @Query(value = "SELECT * FROM spaces s WHERE s.space_key = ?1", nativeQuery = true)
     Space findBySpaceKey(String key);
+
+    void deleteBySpaceKey(String key);
 }

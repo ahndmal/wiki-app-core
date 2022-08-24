@@ -1,6 +1,6 @@
 //package com.anma.conflappcore;
 //
-//import com.anma.conflappcore.rest.SpaceREST;
+//import com.anma.conflappcore.rest.contr.SpaceREST;
 //import org.junit.jupiter.api.Test;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;

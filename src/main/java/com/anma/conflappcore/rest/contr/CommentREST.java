@@ -1,10 +1,12 @@
-package com.anma.conflappcore.rest;
+package com.anma.conflappcore.rest.contr;
 
 import com.anma.conflappcore.models.db.Comment;
 import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.rest.dto.CommentDTO;
+import com.anma.conflappcore.rest.req.CreateCommentReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,5 +49,11 @@ public class CommentREST {
         edited.setUserId(1); // todo - AUTH used
         var saved = commentRepo.save(edited);
         return new CommentDTO(saved.getId(), saved.getBody(), saved.getCreatedAt(), saved.getUserId());
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deletePage(@PathVariable long id) {
+        commentRepo.deleteById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Deleted workout with id = " + id);
     }
 }
