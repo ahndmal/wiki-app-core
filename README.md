@@ -1,6 +1,6 @@
 # wiki-app-core
 
-Primitive example of Confluencelike wiki system based on:
+Primitive example of Confluence-like wiki system based on:
 
 - Spring Boot
 - Reactive Streams
@@ -17,11 +17,35 @@ Features:
 
 ![Screenshot from 2022-05-08 17-56-10](https://user-images.githubusercontent.com/36703491/167308313-ae570b2d-64d6-4e9d-90f3-d49cad50e0e5.png)
 
-
 ![wiki1](https://user-images.githubusercontent.com/36703491/167308633-05977042-254f-40eb-8c71-1b6a9097c300.png)
 
-### DB
+### gRPC
+Add Reflection service:
+```
++import io.grpc.protobuf.services.ProtoReflectionService;
+ import io.grpc.Server;
+ import io.grpc.ServerBuilder;
++import io.grpc.protobuf.services.ProtoReflectionService;
+ import io.grpc.stub.StreamObserver;
+ import java.io.IOException;
+ import java.util.logging.Logger;
+@@ -50,6 +51,7 @@ public class HelloWorldServer {
+     int port = 50051;
+     server = ServerBuilder.forPort(port)
+         .addService(new GreeterImpl())
++        .addService(ProtoReflectionService.newInstance())
+         .build()
+         .start();
+     logger.info("Server started, listening on " + port);
+```
 
+Requests:
+```bash
+grpcurl -plaintext localhost:6565 list
+grpcurl -d '{"id": 242}' -plaintext localhost:6565 com.andmal.PageGService.getPage
+```
+
+### DB
 ```sql
 create table pages(id serial PRIMARY KEY, title varchar, body varchar, space_key varchar);
 
@@ -53,9 +77,4 @@ insert into spaces (id, title, "space_key", category) values (3, 'TEST', 'TEST',
 
 insert into "comments" (id, "body", parent_id, created_at, last_edited, user_id) 
 values (1, 'sdasdadsad', 1, now(), now(), 1);
-```
-### gRPC
-```bash
-grpcurl -plaintext localhost:6565 list
-grpcurl -d '{"id": 242}' -plaintext localhost:6565 com.andmal.PageGService.getPage
 ```

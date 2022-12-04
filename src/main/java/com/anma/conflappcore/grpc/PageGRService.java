@@ -4,6 +4,8 @@ package com.anma.conflappcore.grpc;
 import com.anma.conflappcore.repo.PageRepo;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
+import io.grpc.protobuf.services.ProtoReflectionService;
+
 
 @GRpcService
 public class PageGRService extends PageServiceGrpc.PageServiceImplBase  { //extends com.anma.grpc.PageServiceGrpc
