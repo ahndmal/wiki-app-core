@@ -1,6 +1,6 @@
 package com.anma.conflappcore.models.db;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

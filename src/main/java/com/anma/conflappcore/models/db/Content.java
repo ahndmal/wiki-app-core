@@ -1,12 +1,10 @@
 package com.anma.conflappcore.models.db;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
 @Entity
 @Table(name = "contents")
 public class Content {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
