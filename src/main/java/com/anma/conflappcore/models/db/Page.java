@@ -11,9 +11,9 @@ public class Page {
     private long id;
     private String title;
     private String body;
-    private String spaceKey;
-    @Column(name = "parent_id")
-    private long parentId;
+    @Column(name = "space_key") private String spaceKey;
+    @Column(name = "parent_id") private long parentId;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
     @Column(name = "last_updated")

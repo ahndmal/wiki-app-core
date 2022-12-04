@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface SpaceRepo extends JpaRepository<Space, Long> {
 
-    @Query(value = "SELECT * FROM spaces s WHERE s.title = ?1", nativeQuery = true)
+    @Query(value = "SELECT s FROM Space s WHERE s.title = ?1")
     Space findByTitle(String pageTitle);
 
     Space findByCategory(String category);

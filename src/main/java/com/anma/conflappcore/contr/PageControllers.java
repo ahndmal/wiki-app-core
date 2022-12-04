@@ -33,7 +33,7 @@ public class PageControllers {
     @GetMapping("/pages/{spaceKey}/{pageTitle}")
     public String getPageKeyTitle(Model model, @PathVariable String spaceKey, @PathVariable String pageTitle) {
         viewPagePublisher.publishViewPageEvent(String.format("Page %s:%s viewed by ...", spaceKey, pageTitle));
-        var page = pageRepo.findByTitleAndSpaceKey(pageTitle, spaceKey);
+        var page = pageRepo.findByTitleAndSpacekey(pageTitle, spaceKey);
         LOG.info(">> getPageKeyTitle :: " + page.toString());
         model.addAttribute("page", page);
         return "page/page";

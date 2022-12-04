@@ -30,6 +30,8 @@ public class Boot implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // START
 
+        log.info(String.valueOf(pageRepo.findAll().size()));
+
 //        createPages(1, 100);
 //        createComments(621, 1000);
 

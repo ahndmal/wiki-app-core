@@ -1,6 +1,7 @@
 package com.anma.conflappcore.events;
 
 import com.anma.conflappcore.repo.CommentRepo;
+import com.anma.conflappcore.repo.PageRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -15,18 +16,20 @@ import org.springframework.stereotype.Component;
 public class CheckDataEvents {
     Logger LOG = LoggerFactory.getLogger(CheckDataEvents.class);
     private final CommentRepo commentRepo;
+    private final PageRepo pageRepo;
     private final ApplicationEventPublisher publisher;
 
-
-    public CheckDataEvents(CommentRepo commentRepo, ApplicationEventPublisher publisher) {
+    public CheckDataEvents(CommentRepo commentRepo, ApplicationEventPublisher publisher, PageRepo pageRepo) {
         this.commentRepo = commentRepo;
         this.publisher = publisher;
+        this.pageRepo = pageRepo;
     }
 
     @Scheduled(fixedRate = 30000L)
     public void scheduleCOmmCheck() {
         int commentsSize = commentRepo.findAll().size();
-        System.out.println("comments size is " + commentsSize);
+        LOG.info("comments size is " + commentsSize);
+        LOG.info("pages size is " + pageRepo.findAll().size());
     }
 
     @EventListener
@@ -34,7 +37,7 @@ public class CheckDataEvents {
         Object source = event.getSource();
         long timestamp = event.getTimestamp();
         ApplicationContext applicationContext = event.getApplicationContext();
-
+        LOG.info(">>> ContextStartedEvent :: " + source);
     }
 
     @EventListener(classes = {ContextStartedEvent.class, ContextRefreshedEvent.class})
@@ -51,6 +54,6 @@ public class CheckDataEvents {
     @EventListener
     public void handleViewPage(ViewPageEvent event) {
         Object source = event.getSource();
-        LOG.info(">>> ViewPageEvent :: source: " + source);
+        LOG.info(">>> ViewPageEvent :: " + event.getMessage());
     }
 }

@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Random;
 
 @RestController
-@RequestMapping("/rest/api/comments")
+@RequestMapping("/rest/api/comment")
 public class CommentREST {
 
     @Autowired
