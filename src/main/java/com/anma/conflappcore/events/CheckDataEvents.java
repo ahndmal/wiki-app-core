@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CheckDataEvents {
-    Logger log = LoggerFactory.getLogger(CheckDataEvents.class);
+    Logger LOG = LoggerFactory.getLogger(CheckDataEvents.class);
     private final CommentRepo commentRepo;
     private final ApplicationEventPublisher publisher;
 
@@ -39,6 +39,18 @@ public class CheckDataEvents {
 
     @EventListener(classes = {ContextStartedEvent.class, ContextRefreshedEvent.class})
     public void handleStartEvents() {
-        log.info("ContextStartedEvent or ContextRefreshedEvent annotation based listener raised");
+        LOG.info("ContextStartedEvent or ContextRefreshedEvent annotation based listener raised");
+    }
+
+    @EventListener
+    public void handleCreatePage(PageCreatedEvent event) {
+        Object source = event.getSource();
+        LOG.info(">>> PageCreatedEvent :: source: " + source);
+    }
+
+    @EventListener
+    public void handleViewPage(ViewPageEvent event) {
+        Object source = event.getSource();
+        LOG.info(">>> ViewPageEvent :: source: " + source);
     }
 }

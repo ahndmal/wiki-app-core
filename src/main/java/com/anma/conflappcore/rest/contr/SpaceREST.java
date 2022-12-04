@@ -12,9 +12,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rest/api/spaces")
+@RequestMapping("/rest/api/space")
 public class SpaceREST {
-
     @Autowired
     private final SpaceRepo spaceRepo;
 

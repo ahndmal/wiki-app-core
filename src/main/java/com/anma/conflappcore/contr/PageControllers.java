@@ -1,5 +1,6 @@
 package com.anma.conflappcore.contr;
 
+import com.anma.conflappcore.events.ViewPagePublisher;
 import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.repo.PageRepo;
 import org.slf4j.Logger;
@@ -15,10 +16,12 @@ public class PageControllers {
     Logger LOG = LoggerFactory.getLogger(this.getClass().getName());
     private final PageRepo pageRepo;
     private final CommentRepo commentRepo;
+    private final ViewPagePublisher viewPagePublisher;
 
-    public PageControllers(PageRepo pageRepo, CommentRepo commentRepo) {
+    public PageControllers(PageRepo pageRepo, CommentRepo commentRepo, ViewPagePublisher viewPagePublisher) {
         this.pageRepo = pageRepo;
         this.commentRepo = commentRepo;
+        this.viewPagePublisher = viewPagePublisher;
     }
 
     @GetMapping("/")
@@ -29,36 +32,32 @@ public class PageControllers {
 
     @GetMapping("/pages/{spaceKey}/{pageTitle}")
     public String getPageKeyTitle(Model model, @PathVariable String spaceKey, @PathVariable String pageTitle) {
-
+        viewPagePublisher.publishViewPageEvent(String.format("Page %s:%s viewed by ...", spaceKey, pageTitle));
         var page = pageRepo.findByTitleAndSpaceKey(pageTitle, spaceKey);
+        LOG.info(">> getPageKeyTitle :: " + page.toString());
         model.addAttribute("page", page);
-
-        return "page";
+        return "page/page";
     }
-    @GetMapping("/viewpage")
+    @GetMapping("/pages/{pageId}")
     public String getPageId(Model model, @RequestParam long pageId) {
-
         var page = pageRepo.findById(pageId).get();
         model.addAttribute("page", page);
         model.addAttribute("comments", commentRepo.findCommentByParentId(pageId));
-
-        return "page";
+        return "page/page";
     }
 
     @GetMapping("editpage/{pageId}")
     public String editPage(@PathVariable long pageId, Model model) {
-
         var page = pageRepo.findById(pageId).get();
         model.addAttribute("page", page);
         model.addAttribute("pageId", pageId);
-
-        return "edit-page";
+        return "page/edit-page";
     }
 
     @GetMapping("/pages/all")
     public String getPages(Model model) {
         model.addAttribute("pages", pageRepo.findAll());
-        return "pages";
+        return "page/pages";
     }
 
 }

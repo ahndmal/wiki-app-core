@@ -2,8 +2,8 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Page</title>
-    <link rel="stylesheet" type="text/css" href="../../style.css">
+    <title>Spaces</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="https://unpkg.com/@atlassian/aui@8.6.0/dist/aui/aui-prototyping.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/1.15.4/sinon.js"></script>
@@ -11,22 +11,28 @@
 </head>
 <body>
 <nav class="nav">
-    <div class="nav-elem"><a href="/">Home</a></div>
+    <div class="nav-elem"><a href="/static">Home</a></div>
     <div class="nav-elem"><a href="/spaces">Spaces</a></div>
     <div class="nav-elem"><a href="/pages/all">Pages</a></div>
     <div class="nav-elem"><a href="/blogs">Blogs</a></div>
-    <div class="nav-elem"><a href="/comments">Comments</a></div>
     <div class="nav-elem"><a href="/profile">Profile</a></div>
 </nav>
-    <button id="edit-comment" class="button">Edit</button>
-    <div class="root">
-        <div>
-            <p th:text="${comment.body}"></p>
-            <p th:text="${comment.createdAt}"></p>
-            <p th:text="${comment.lastEdited}"></p>
-        </div>
+<h2>Spaces</h2>
+<div class="root">
+    <div class="spaces" id="spaces"></div>
+    <div>
+        <p>
+<!--            <a href="" th:if="${space.spaceKey != null}" th:href="@{/spaces/spacKey(spaceKey=${space.spaceKey})}" th:text="${space.title}"></a>-->
+        </p>
+        <p th:text="${space.spaceKey}"></p>
     </div>
+</div>
 
+<script type="text/javascript">
+    const root = document.querySelector('.root');
+    const spacesDiv = document.querySelector('#spaces');
+
+</script>
 
 </body>
 </html>
