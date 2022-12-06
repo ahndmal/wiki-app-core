@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Stats</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" type="text/css" href="https://unpkg.com/@atlassian/aui@8.6.0/dist/aui/aui-prototyping.css"/>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sinon.js/1.15.4/sinon.js"></script>
+        <script src="https://unpkg.com/@atlassian/aui@8.6.0/dist/aui/aui-prototyping.js"></script>
+</head>
+<body>
+<!--<div th:insert="header :: header"></div>-->
+<nav class="nav">
+    <div class="nav-elem"><a href="/static">Home</a></div>
+    <div class="nav-elem"><a href="/spaces">Spaces</a></div>
+    <div class="nav-elem"><a href="/pages/all">Pages</a></div>
+    <div class="nav-elem"><a href="/blogs">Blogs</a></div>
+    <div class="nav-elem"><a href="/comments">Comments</a></div>
+    <div class="nav-elem"><a href="/profile">Profile</a></div>
+</nav>
+    <h2>Statistics</h2>
+    <div class="stats-core">
+        <table>
+            <thead>
+                <tr>
+                    <th>Spaces</th>
+                    <th>Pages</th>
+                    <th>Blogs</th>
+                    <th>Comments</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td th:text="${spaces}"></td>
+                    <td th:text="${pages}"></td>
+                    <td th:text="${blogs}"></td>
+                    <td th:text="${comments}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

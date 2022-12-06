@@ -21,13 +21,13 @@ public class SpaceController {
     @GetMapping
     public String spaces(Model model) {
         model.addAttribute("spaces", spaceRepo.findAll());
-        return "spaces";
+        return "space/spaces";
     }
 
     @GetMapping("/{key}")
     public String getSpace(@PathVariable String key, Model model) {
         model.addAttribute("space", spaceRepo.findBySpaceKey(key));
-        return "space";
+        return "space/space";
     }
 
 }
