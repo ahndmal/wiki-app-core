@@ -20,7 +20,7 @@
             <div class="pages-root" th:each="page : ${pages}">
                 <div class="page">
                     <p>
-                        <a th:href="@{'/viewpage?pageId=' + ${page.id}}" th:text="${page.title}">
+                        <a th:href="@{'/pages/' + ${page.id}}" th:text="${page.title}">
 
                         </a>
                     </p>

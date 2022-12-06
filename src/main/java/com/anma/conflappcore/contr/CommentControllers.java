@@ -26,25 +26,24 @@ public class CommentControllers {
         model.addAttribute("page", pageRepo.findById(pageId).get());
         var comment = commentRepo.getById(commId);
         model.addAttribute("comment", comment);
-        return "comment";
+        return "comment/comment";
     }
 
     @GetMapping("edit-comment/{pageId}/{commId}")
     public String EditComment(@PathVariable long pageId, @PathVariable long commId, Model model) {
-
         var page = pageRepo.findById(pageId).get();
         model.addAttribute("page", page);
         model.addAttribute("$pageId", pageId);
         model.addAttribute("commId", commId);
         model.addAttribute("comment", commentRepo.getById(commId));
 
-        return "edit-comment";
+        return "comment/edit-comment";
     }
 
     @GetMapping("/comments")
     public String comments(Model model) {
         model.addAttribute("comments", commentRepo.findAll());
-        return "comments";
+        return "comment/comments";
     }
 
 }

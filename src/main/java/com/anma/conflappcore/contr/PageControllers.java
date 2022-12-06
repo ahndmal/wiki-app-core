@@ -1,6 +1,7 @@
 package com.anma.conflappcore.contr;
 
 import com.anma.conflappcore.events.ViewPagePublisher;
+import com.anma.conflappcore.models.db.Page;
 import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.repo.PageRepo;
 import org.slf4j.Logger;
@@ -38,8 +39,9 @@ public class PageControllers {
         model.addAttribute("page", page);
         return "page/page";
     }
+
     @GetMapping("/pages/{pageId}")
-    public String getPageId(Model model, @RequestParam long pageId) {
+    public String getPageId(Model model, @PathVariable long pageId) {
         var page = pageRepo.findById(pageId).get();
         model.addAttribute("page", page);
         model.addAttribute("comments", commentRepo.findCommentByParentId(pageId));
@@ -48,7 +50,7 @@ public class PageControllers {
 
     @GetMapping("editpage/{pageId}")
     public String editPage(@PathVariable long pageId, Model model) {
-        var page = pageRepo.findById(pageId).get();
+        Page page = pageRepo.findById(pageId).get();
         model.addAttribute("page", page);
         model.addAttribute("pageId", pageId);
         return "page/edit-page";
