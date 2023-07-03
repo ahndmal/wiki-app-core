@@ -21,7 +21,7 @@ Features:
 
 ### gRPC
 Add Reflection service:
-```
+```java
 +import io.grpc.protobuf.services.ProtoReflectionService;
  import io.grpc.Server;
  import io.grpc.ServerBuilder;

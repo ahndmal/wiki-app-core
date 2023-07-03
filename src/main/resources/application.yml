@@ -13,7 +13,7 @@ spring:
   datasource:
     url: jdbc:postgresql://167.235.52.214/wiki1
     username: dev
-    password: ${DB_PASS}
+    password: possum!
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
@@ -27,3 +27,4 @@ spring:
 grpc:
   port: 6565
   shutdownGrace: 30
+  enableReflection: true

@@ -17,8 +17,8 @@ import java.util.Random;
 @RestController
 @RequestMapping("/rest/api/pages")
 public class PageRest {
-
     private final PageRepo pageRepo;
+   
     @Autowired
     public PageRest(PageRepo pageRepo) {
         this.pageRepo = pageRepo;
@@ -66,6 +66,8 @@ public class PageRest {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deletePage(@PathVariable long id) {
         pageRepo.deleteById(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body("Deleted workout with id = " + id);
+        return ResponseEntity
+            .status(HttpStatus.NO_CONTENT)
+            .body("Deleted workout with id = " + id);
     }
 }

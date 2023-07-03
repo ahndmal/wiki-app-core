@@ -26,7 +26,7 @@ public class CheckDataEvents {
     }
 
     @Scheduled(fixedRate = 30000L)
-    public void scheduleCOmmCheck() {
+    public void scheduleCommCheck() {
         int commentsSize = commentRepo.findAll().size();
         LOG.info("comments size is " + commentsSize);
         LOG.info("pages size is " + pageRepo.findAll().size());
