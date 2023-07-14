@@ -10,6 +10,10 @@ message PageRequest {
   int64 id = 1;
 }
 
+message PagesRequest {
+  int32 limit = 1;
+}
+
 message PageResponse {
   int64 id = 1;
   string body = 2;
@@ -17,6 +21,10 @@ message PageResponse {
   string spaceKey = 4;
   int64 parentId = 5;
   int64 authorId = 6;
+}
+
+message PagesResponse {
+  map<string, string> pages = 1;
 }
 
 message CommentResponse {
@@ -27,5 +35,6 @@ message CommentResponse {
 
 service PageService {
   rpc GetPage(PageRequest) returns (PageResponse) {}
-  rpc GetPages(PageRequest) returns (stream PageResponse) {}
+  rpc GetPages(PagesRequest) returns (stream PageResponse) {}
+  rpc GetPagesByAuthor(PageRequest) returns (PageResponse) {}
 }

@@ -3,6 +3,7 @@ package com.anma.conflappcore.rest.contr;
 import com.anma.conflappcore.models.ContentWeb;
 import com.anma.conflappcore.models.db.Page;
 import com.anma.conflappcore.repo.PageRepo;
+import com.anma.conflappcore.rest.dto.ContentType;
 import com.anma.conflappcore.rest.dto.PageDTO;
 import com.anma.conflappcore.rest.req.CreatePageReq;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,7 @@ public class PageRest {
     public ContentWeb getPageById(@PathVariable long id) {
         Page page = pageRepo.getById(id);
         var content = new ContentWeb(id, page.getTitle(),
-                "page",
+                ContentType.PAGE.name(),
                 page.getBody(),
                 page.getSpaceKey(),
                 String.valueOf(page.getId()),

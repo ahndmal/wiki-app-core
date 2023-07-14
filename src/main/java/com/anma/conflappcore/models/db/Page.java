@@ -84,4 +84,18 @@ public class Page {
     public void setParentId(long parentId) {
         this.parentId = parentId;
     }
+
+    @Override
+    public String toString() {
+        return "Page{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                ", spaceKey='" + spaceKey + '\'' +
+                ", parentId=" + parentId +
+                ", createdAt=" + createdAt +
+                ", lastUpdated=" + lastUpdated +
+                ", authorId=" + authorId +
+                '}';
+    }
 }

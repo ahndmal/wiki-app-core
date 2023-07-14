@@ -12,7 +12,9 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Component
 public class Boot implements CommandLineRunner {
@@ -31,6 +33,9 @@ public class Boot implements CommandLineRunner {
         // START
 
         // log.info(String.valueOf(pageRepo.findAll().size()));
+
+        List<Page> pages = pageRepo.findAll().stream().filter(p -> p.getId() < 5000L).toList();
+        System.out.println(pages.get(0));
 
 //        createPages(1, 100);
 //        createComments(621, 1000);

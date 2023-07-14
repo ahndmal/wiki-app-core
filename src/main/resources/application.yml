@@ -12,8 +12,8 @@ spring:
     name: wiki-core
   datasource:
     url: jdbc:postgresql://167.235.52.214/wiki1
-    username: dev
-    password: possum!
+    username: ${DB_USER}
+    password: ${DB_PASS}
     driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:

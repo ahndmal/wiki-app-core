@@ -1,14 +1,19 @@
 plugins {
+    id 'java'
     id 'org.springframework.boot' version '3.1.1'
     id 'io.spring.dependency-management' version '1.1.0'
-    id 'java'
     id 'com.google.protobuf' version '0.9.1'
     id 'org.asciidoctor.convert' version '1.5.6'
 }
 
 group = 'com.andmal'
-version = '0.1.1'
-sourceCompatibility = '17'
+version = '0.1.2'
+
+java {
+    toolchain {
+        version = JavaVersion.VERSION_17
+    }
+}
 
 protobuf {
     protoc {
