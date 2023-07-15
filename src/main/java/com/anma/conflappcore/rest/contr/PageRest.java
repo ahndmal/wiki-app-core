@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:3001"})
 @RestController
 @RequestMapping("/rest/api/pages")
 public class PageRest {
@@ -30,8 +31,22 @@ public class PageRest {
     }
 
     @GetMapping()
-    public List<Page> getPages() {
+    public List<Page> getPages(
+            @RequestParam String spaceKey,
+            @RequestParam String title) {
+        if (!spaceKey.isEmpty()) {
+            return pageRepo.findBySpaceKey(spaceKey);
+        }
+
+        if (!title.isEmpty()) {
+            return pageRepo.findByTitle(title);
+        }
         return pageRepo.findAll().stream().limit(10000).collect(Collectors.toList());
+    }
+
+    @GetMapping("/space/{space}")
+    public List<Page> getSpacePages(@PathVariable String space, @RequestParam(defaultValue = "300") int limit) {
+        return pageRepo.findBySpaceKey(space).stream().limit(limit).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
