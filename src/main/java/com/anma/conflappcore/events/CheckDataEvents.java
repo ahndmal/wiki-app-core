@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CheckDataEvents {
-    Logger LOG = LoggerFactory.getLogger(CheckDataEvents.class);
+    private Logger LOG = LoggerFactory.getLogger(CheckDataEvents.class);
     private final CommentRepo commentRepo;
     private final PageRepo pageRepo;
     private final ApplicationEventPublisher publisher;

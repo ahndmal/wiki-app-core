@@ -14,11 +14,10 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 @Component
 public class Boot implements CommandLineRunner {
-    private final Logger log = LoggerFactory.getLogger(Boot.class);
+    private final Logger LOG = LoggerFactory.getLogger(Boot.class);
     private final CommentRepo commentRepo;
     private final PageRepo pageRepo;
 
@@ -32,7 +31,7 @@ public class Boot implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // START
 
-        // log.info(String.valueOf(pageRepo.findAll().size()));
+        // LOG.info(String.valueOf(pageRepo.findAll().size()));
 
         List<Page> pages = pageRepo.findAll().stream().filter(p -> p.getId() < 5000L).toList();
         System.out.println(pages.get(0));
@@ -63,10 +62,10 @@ public class Boot implements CommandLineRunner {
             Comment save = commentRepo.save(comment);
             if (save.getId() != 0) {
                 count ++;
-                log.info(">> comment created");
+                LOG.info(">> comment created");
             }
         }
-        log.info(count + "  Comments created!");
+        LOG.info(count + "  Comments created!");
     }
 
     private void createPages(int from, int to) {
@@ -83,9 +82,9 @@ public class Boot implements CommandLineRunner {
             var saved = pageRepo.save(page);
             if (saved.getId() != 0) {
                 from ++;
-                log.info(">> page created");
+                LOG.info(">> page created");
             }
         }
-        log.info(from + "  pages created!");
+        LOG.info(from + "  pages created!");
     }
 }

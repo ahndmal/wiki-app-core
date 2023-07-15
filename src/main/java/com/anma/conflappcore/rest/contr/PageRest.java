@@ -6,6 +6,8 @@ import com.anma.conflappcore.repo.PageRepo;
 import com.anma.conflappcore.rest.dto.ContentType;
 import com.anma.conflappcore.rest.dto.PageDTO;
 import com.anma.conflappcore.rest.req.CreatePageReq;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/rest/api/pages")
 public class PageRest {
+    private static final Logger LOG = LoggerFactory.getLogger(PageRest.class);
     private final PageRepo pageRepo;
    
     @Autowired
@@ -27,13 +31,33 @@ public class PageRest {
 
     @GetMapping()
     public List<Page> getPages() {
-        return pageRepo.findAll();
+        return pageRepo.findAll().stream().limit(10000).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public ContentWeb getPageById(@PathVariable long id) {
         Page page = pageRepo.getById(id);
         var content = new ContentWeb(id, page.getTitle(),
+                ContentType.PAGE.name(),
+                page.getBody(),
+                page.getSpaceKey(),
+                String.valueOf(page.getId()),
+                page.getCreatedAt(),
+                page.getLastUpdated());
+        return content;
+    }
+
+    @GetMapping("/{key}/{title}")
+    public ContentWeb getPageBySpacekeyAndTitle(@PathVariable String key, @PathVariable String title) {
+        LOG.warn(">> getPageBySpacekeyAndTitle");
+        LOG.warn(">> key: " + key);
+        LOG.warn(">> title: " + title);
+        Page page = pageRepo.findByTitleAndSpaceKey(title, key);
+        LOG.warn(page.toString());
+
+        var content = new ContentWeb(
+                page.getId(),
+                page.getTitle(),
                 ContentType.PAGE.name(),
                 page.getBody(),
                 page.getSpaceKey(),
