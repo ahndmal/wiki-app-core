@@ -1,8 +1,8 @@
 package com.anma.conflappcore.rest.contr;
 
-import com.anma.conflappcore.models.db.Space;
+import com.anma.conflappcore.models.db.WikiSpace;
 import com.anma.conflappcore.repo.SpaceRepo;
-import com.anma.conflappcore.rest.dto.SpaceDTO;
+import com.anma.conflappcore.models.dto.SpaceDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,23 +22,23 @@ public class SpaceREST {
     }
 
     @GetMapping()
-    public List<Space> getSpaces() {
+    public List<WikiSpace> getSpaces() {
         return spaceRepo.findAll();
     }
 
     @GetMapping("/id/{id}")
-    public Space getSpaceId(@PathVariable long id) {
+    public WikiSpace getSpaceId(@PathVariable long id) {
         return spaceRepo.getById(id);
     }
 
     @GetMapping("/key/{key}")
-    public Space getSpaceByKey(@PathVariable String key) {
+    public WikiSpace getSpaceByKey(@PathVariable String key) {
         return spaceRepo.findBySpaceKey(key);
     }
 
     @PostMapping
-    public Space createSpace(SpaceDTO dto) {
-        var space = new Space();
+    public WikiSpace createSpace(SpaceDto dto) {
+        var space = new WikiSpace();
         space.setTitle(dto.title());
         space.setSpaceKey(dto.key());
         space.setCategory(dto.category());
@@ -47,7 +47,7 @@ public class SpaceREST {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public SpaceDTO saveSpace(@PathVariable long id, @RequestBody CreateSpaceReq dto) {
+    public SpaceDto saveSpace(@PathVariable long id, @RequestBody CreateSpaceReq dto) {
         var edited = spaceRepo.getById(id);
         edited.setTitle(dto.title());
         edited.setSpaceKey(dto.key());
@@ -56,7 +56,7 @@ public class SpaceREST {
         edited.setLastUpdated(LocalDateTime.now());
         edited.setCreatedAt(LocalDateTime.now());
         var savedSpace = spaceRepo.save(edited);
-        return new SpaceDTO(
+        return new SpaceDto(
                 savedSpace.getId(),
                 savedSpace.getTitle(),
                 savedSpace.getSpaceKey(),

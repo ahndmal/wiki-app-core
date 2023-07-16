@@ -1,6 +1,6 @@
 package com.anma.conflappcore.grpc;
 
-import com.anma.conflappcore.models.db.Page;
+import com.anma.conflappcore.models.db.WikiPage;
 import com.anma.conflappcore.repo.PageRepo;
 import io.grpc.stub.StreamObserver;
 import org.lognet.springboot.grpc.GRpcService;
@@ -17,7 +17,7 @@ public class PageGRService extends PageServiceGrpc.PageServiceImplBase  { //exte
 
     @Override
     public void getPage(PageRequest request, StreamObserver<PageResponse> responseObserver) {
-        Page page = pageRepo.findById(request.getId()).get();
+        WikiPage page = pageRepo.findById(request.getId()).get();
         PageResponse pageResp = PageResponse.newBuilder()
                 .setBody(page.getBody())
                 .setId(page.getId())
@@ -32,9 +32,9 @@ public class PageGRService extends PageServiceGrpc.PageServiceImplBase  { //exte
 
     @Override
     public void getPages(PagesRequest request, StreamObserver<PageResponse> responseObserver) {
-        List<Page> pages = pageRepo.findAll();
+        List<WikiPage> pages = pageRepo.findAll();
         for (int i = 0; i <= request.getLimit(); i++) {
-            Page page = pageRepo.findById(pages.get(i).getId()).get();
+            WikiPage page = pageRepo.findById(pages.get(i).getId()).get();
             PageResponse pageResp = PageResponse.newBuilder()
                     .setBody(page.getBody())
                     .setId(page.getId())

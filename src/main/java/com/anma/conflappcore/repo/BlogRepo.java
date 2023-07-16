@@ -1,7 +1,6 @@
 package com.anma.conflappcore.repo;
 
 import com.anma.conflappcore.models.db.Blog;
-import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

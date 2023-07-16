@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name ="spaces")
-public class Space {
+public class WikiSpace {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

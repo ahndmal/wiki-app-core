@@ -1,7 +1,7 @@
 package com.anma.conflappcore.contr;
 
 import com.anma.conflappcore.events.ViewPagePublisher;
-import com.anma.conflappcore.models.db.Page;
+import com.anma.conflappcore.models.db.WikiPage;
 import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.repo.PageRepo;
 import org.slf4j.Logger;
@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class PageControllers {
@@ -50,7 +49,7 @@ public class PageControllers {
 
     @GetMapping("editpage/{pageId}")
     public String editPage(@PathVariable long pageId, Model model) {
-        Page page = pageRepo.findById(pageId).get();
+        WikiPage page = pageRepo.findById(pageId).get();
         model.addAttribute("page", page);
         model.addAttribute("pageId", pageId);
         return "page/edit-page";

@@ -1,6 +1,6 @@
-package com.anma.conflappcore.rest.dto;
+package com.anma.conflappcore.models.dto;
 
-public record PageDTO(
+public record PageDto(
         long id,
         String title,
         String body,

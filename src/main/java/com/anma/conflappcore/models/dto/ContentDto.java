@@ -1,8 +1,8 @@
-package com.anma.conflappcore.models;
+package com.anma.conflappcore.models.dto;
 
 import java.time.LocalDateTime;
 
-public record ContentWeb(
+public record ContentDto(
         long id,
         String title,
         String type,

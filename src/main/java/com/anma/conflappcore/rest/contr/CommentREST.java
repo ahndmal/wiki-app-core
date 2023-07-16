@@ -1,11 +1,11 @@
 package com.anma.conflappcore.rest.contr;
 
-import com.anma.conflappcore.models.ContentWeb;
+import com.anma.conflappcore.models.dto.ContentDto;
 import com.anma.conflappcore.models.db.Comment;
-import com.anma.conflappcore.models.db.Page;
+import com.anma.conflappcore.models.db.WikiPage;
 import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.repo.PageRepo;
-import com.anma.conflappcore.rest.dto.CommentDTO;
+import com.anma.conflappcore.models.dto.CommentDto;
 import com.anma.conflappcore.rest.req.CreateCommentReq;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,9 +35,9 @@ public class CommentREST {
     }
 
     @GetMapping("/{id}")
-    public ContentWeb getComment(@PathVariable long id) {
+    public ContentDto getComment(@PathVariable long id) {
         var comment = commentRepo.getById(id);
-        Page page = null;
+        WikiPage page = null;
         try {
             page = pageRepo.getById(comment.getParentId());
             System.out.println(page);
@@ -46,7 +46,7 @@ public class CommentREST {
         }
         String parentId = page == null ? "" : String.valueOf(page.getId());
         String spaceKey = page == null ? "" : page.getSpaceKey();
-        var content = new ContentWeb(id, comment.getTitle(), "comment", comment.getBody(), spaceKey,
+        var content = new ContentDto(id, comment.getTitle(), "comment", comment.getBody(), spaceKey,
                 parentId,
                 comment.getCreatedAt(),
                 comment.getLastEdited());
@@ -64,12 +64,12 @@ public class CommentREST {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public CommentDTO saveSpace(@PathVariable long id, @RequestBody CreateCommentReq dto) {
+    public CommentDto saveSpace(@PathVariable long id, @RequestBody CreateCommentReq dto) {
         var edited = commentRepo.getById(id);
         edited.setBody(dto.body());
         edited.setUserId(new Random().nextInt(1,5)); // todo - AUTH used
         var saved = commentRepo.save(edited);
-        return new CommentDTO(saved.getId(), saved.getBody(), saved.getCreatedAt(), saved.getUserId());
+        return new CommentDto(saved.getId(), saved.getBody(), saved.getCreatedAt(), saved.getUserId());
     }
 
     @DeleteMapping("/{id}")

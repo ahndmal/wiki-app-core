@@ -1,7 +1,7 @@
 package com.anma.conflappcore;
 
 import com.anma.conflappcore.models.db.Comment;
-import com.anma.conflappcore.models.db.Page;
+import com.anma.conflappcore.models.db.WikiPage;
 import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.repo.PageRepo;
 import com.anma.conflappcore.utils.RandomUtils;
@@ -33,7 +33,7 @@ public class Boot implements CommandLineRunner {
 
         // LOG.info(String.valueOf(pageRepo.findAll().size()));
 
-        List<Page> pages = pageRepo.findAll().stream().filter(p -> p.getId() < 5000L).toList();
+        List<WikiPage> pages = pageRepo.findAll().stream().filter(p -> p.getId() < 5000L).toList();
         System.out.println(pages.get(0));
 
 //        createPages(1, 100);
@@ -70,7 +70,7 @@ public class Boot implements CommandLineRunner {
 
     private void createPages(int from, int to) {
         for (int i = from; i < to; i++) {
-            var page = new Page();
+            var page = new WikiPage();
             page.setId(i);
             page.setTitle(String.format("Test Page %d", RandomUtils.getRandomNum(1, 100)));
             page.setBody(RandomUtils.getRandomText(50));

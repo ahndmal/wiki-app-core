@@ -1,8 +1,8 @@
-package com.anma.conflappcore.rest.dto;
+package com.anma.conflappcore.models.dto;
 
 import java.time.LocalDateTime;
 
-public record CommentDTO(
+public record CommentDto(
         long id,
         String body,
         LocalDateTime createdAt,

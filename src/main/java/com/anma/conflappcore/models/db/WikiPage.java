@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name ="pages")
-public class Page {
+public class WikiPage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
