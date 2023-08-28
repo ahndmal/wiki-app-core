@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class PageControllers {
-    Logger LOG = LoggerFactory.getLogger(this.getClass().getName());
+    private final Logger LOG = LoggerFactory.getLogger(this.getClass().getName());
     private final PageRepo pageRepo;
     private final CommentRepo commentRepo;
     private final ViewPagePublisher viewPagePublisher;
@@ -57,7 +57,8 @@ public class PageControllers {
 
     @GetMapping("/pages/all")
     public String getPages(Model model) {
-        model.addAttribute("pages", pageRepo.findAll());
+        var pages = pageRepo.findAll().stream().filter(p -> p.getId() < 4000).toList();
+        model.addAttribute("pages", pages);
         return "page/pages";
     }
 

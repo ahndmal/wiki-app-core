@@ -4,6 +4,7 @@ import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.repo.PageRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +12,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @Controller
 public class CommentControllers {
-    Logger LOG = LoggerFactory.getLogger(this.getClass().getName());
+    private final Logger LOG = LoggerFactory.getLogger(this.getClass().getName());
     private final CommentRepo commentRepo;
     private final PageRepo pageRepo;
 
+    @Autowired
     public CommentControllers(CommentRepo commentRepo, PageRepo pageRepo) {
         this.commentRepo = commentRepo;
         this.pageRepo = pageRepo;
@@ -42,7 +44,15 @@ public class CommentControllers {
 
     @GetMapping("/comments")
     public String comments(Model model) {
-        model.addAttribute("comments", commentRepo.findAll());
+        var comments = commentRepo.findAll();
+        if (comments.size() > 1000) {
+            LOG.info(">>> serving COMMENTS page with < 1000 comments");
+            model.addAttribute("comments", comments.stream().takeWhile(c -> c.getId() < 1000).toList());
+        } else {
+            LOG.info(">>> serving COMMENTS page with ALL comments");
+            model.addAttribute("comments", comments);
+        }
+
         return "comment/comments";
     }
 

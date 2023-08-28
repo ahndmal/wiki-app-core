@@ -35,13 +35,12 @@ public class Boot implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // START
 
-
-//        List<WikiPage> pages = pageRepo.findAll().stream().filter(p -> p.getId() < 5000L).toList();
-
 //        createPages(1, 100);
 //        createComments(621, 1000);
 
-        createSpaces(30);
+        if (spaceRepo.count() < 10) {
+            createSpaces(30);
+        }
 
 
         // END
