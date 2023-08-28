@@ -15,6 +15,10 @@ Features:
 - emails
 - groovy/python console
 
+```bash
+./gradlew bootRun --args='DB_PASS=pass DB_USER=user'
+```
+
 ![Screenshot from 2022-05-08 17-56-10](https://user-images.githubusercontent.com/36703491/167308313-ae570b2d-64d6-4e9d-90f3-d49cad50e0e5.png)
 
 ![wiki1](https://user-images.githubusercontent.com/36703491/167308633-05977042-254f-40eb-8c71-1b6a9097c300.png)
@@ -29,7 +33,8 @@ Add Reflection service:
  import io.grpc.stub.StreamObserver;
  import java.io.IOException;
  import java.util.logging.Logger;
-@@ -50,6 +51,7 @@ public class HelloWorldServer {
+ 
+ public class HelloWorldServer {
      int port = 50051;
      server = ServerBuilder.forPort(port)
          .addService(new GreeterImpl())

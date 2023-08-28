@@ -1,5 +1,7 @@
-package com.anma.conflappcore.events;
+package com.anma.conflappcore.events.lst;
 
+import com.anma.conflappcore.events.PageCreatedEvent;
+import com.anma.conflappcore.events.ViewPageEvent;
 import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.repo.PageRepo;
 import org.slf4j.Logger;
@@ -14,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CheckDataEvents {
-    private Logger LOG = LoggerFactory.getLogger(CheckDataEvents.class);
+    private final Logger LOG = LoggerFactory.getLogger(CheckDataEvents.class);
     private final CommentRepo commentRepo;
     private final PageRepo pageRepo;
     private final ApplicationEventPublisher publisher;

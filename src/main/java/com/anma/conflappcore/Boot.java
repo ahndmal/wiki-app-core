@@ -2,8 +2,10 @@ package com.anma.conflappcore;
 
 import com.anma.conflappcore.models.db.Comment;
 import com.anma.conflappcore.models.db.WikiPage;
+import com.anma.conflappcore.models.db.WikiSpace;
 import com.anma.conflappcore.repo.CommentRepo;
 import com.anma.conflappcore.repo.PageRepo;
+import com.anma.conflappcore.repo.SpaceRepo;
 import com.anma.conflappcore.utils.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,32 +22,47 @@ public class Boot implements CommandLineRunner {
     private final Logger LOG = LoggerFactory.getLogger(Boot.class);
     private final CommentRepo commentRepo;
     private final PageRepo pageRepo;
+    private final SpaceRepo spaceRepo;
 
     @Autowired
-    public Boot(CommentRepo commentRepo, PageRepo pageRepo) {
+    public Boot(CommentRepo commentRepo, PageRepo pageRepo, SpaceRepo spaceRepo) {
         this.commentRepo = commentRepo;
         this.pageRepo = pageRepo;
+        this.spaceRepo = spaceRepo;
     }
 
     @Override
     public void run(String... args) throws Exception {
         // START
 
-        // LOG.info(String.valueOf(pageRepo.findAll().size()));
 
-        List<WikiPage> pages = pageRepo.findAll().stream().filter(p -> p.getId() < 5000L).toList();
-        System.out.println(pages.get(0));
+//        List<WikiPage> pages = pageRepo.findAll().stream().filter(p -> p.getId() < 5000L).toList();
 
 //        createPages(1, 100);
 //        createComments(621, 1000);
 
-        // set userId
-//        commentRepo.findAll().stream().map(c -> {
-//            c.setUserId(2);
-//            return commentRepo.save(c);
-//        });
+        createSpaces(30);
+
 
         // END
+    }
+
+    private void createSpaces(int amount) {
+        LOG.info(">>> creating spaces");
+        for (long i = 4; i <= amount; i++) {
+            WikiSpace space = new WikiSpace();
+//            space.setId(i);
+            space.setSpaceKey("DEV" + i);
+            space.setTitle("DEV " + i);
+            space.setAuthorId(1L);
+            space.setCategory("test");
+            space.setCreatedAt(LocalDateTime.now());
+            space.setLastUpdated(LocalDateTime.now());
+            spaceRepo.save(space);
+
+            LOG.info(">>> created space " + i);
+
+        }
     }
 
     private void createComments(int from, int to) {
@@ -61,7 +78,7 @@ public class Boot implements CommandLineRunner {
             comment.setUserId(RandomUtils.getRandomNum(1, 3));
             Comment save = commentRepo.save(comment);
             if (save.getId() != 0) {
-                count ++;
+                count++;
                 LOG.info(">> comment created");
             }
         }
@@ -81,7 +98,7 @@ public class Boot implements CommandLineRunner {
             page.setAuthorId(RandomUtils.getRandomNum(1, 5));
             var saved = pageRepo.save(page);
             if (saved.getId() != 0) {
-                from ++;
+                from++;
                 LOG.info(">> page created");
             }
         }

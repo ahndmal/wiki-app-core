@@ -5,7 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 public interface SpaceRepo extends JpaRepository<WikiSpace, Long> {
-
     @Query(value = "SELECT s FROM WikiSpace s WHERE s.title = ?1")
     WikiSpace findByTitle(String pageTitle);
 

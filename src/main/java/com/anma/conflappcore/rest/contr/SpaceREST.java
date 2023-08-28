@@ -14,9 +14,9 @@ import java.util.List;
 @RestController
 @RequestMapping("/rest/api/space")
 public class SpaceREST {
-    @Autowired
     private final SpaceRepo spaceRepo;
 
+    @Autowired
     public SpaceREST(SpaceRepo spaceRepo) {
         this.spaceRepo = spaceRepo;
     }
@@ -39,9 +39,9 @@ public class SpaceREST {
     @PostMapping
     public WikiSpace createSpace(SpaceDto dto) {
         var space = new WikiSpace();
-        space.setTitle(dto.title());
-        space.setSpaceKey(dto.key());
-        space.setCategory(dto.category());
+        space.setTitle(dto.getTitle());
+        space.setSpaceKey(dto.getKey());
+        space.setCategory(dto.getCategory());
         return spaceRepo.save(space);
     }
 

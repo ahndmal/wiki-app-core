@@ -1,5 +1,6 @@
-package com.anma.conflappcore.events;
+package com.anma.conflappcore.events.lst;
 
+import com.anma.conflappcore.events.PageCreatedEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 
