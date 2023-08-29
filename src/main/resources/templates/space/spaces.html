@@ -18,16 +18,16 @@
     <div class="nav-elem"><a href="/comments">Comments</a></div>
     <div class="nav-elem"><a href="/profile">Profile</a></div>
 </nav>
-    <div class="root">
-        <h2>Spaces</h2>
-        <div class="spaces" id="spaces"></div>
-        <div th:each="space : ${spaces}">
-            <div>
-        <!--                @{/order/{orderId}/details(orderId=${orderId})}-->
-                <p><a href="" th:href="@{/spaces/{spaceKey}(spaceKey=${space.spaceKey})}" th:text="${space.title}"></a></p>
-            </div>
+<div class="root">
+    <h2>Spaces</h2>
+    <div class="spaces" id="spaces"></div>
+    <div th:each="space : ${spaces}">
+        <div>
+            <!--                @{/order/{orderId}/details(orderId=${orderId})}-->
+            <p><a href="" th:href="@{/spaces/{spaceKey}(spaceKey=${space.spaceKey})}" th:text="${space.title}"></a></p>
         </div>
     </div>
+</div>
 
 <script type="text/javascript">
     const root = document.querySelector('.root');

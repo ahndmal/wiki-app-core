@@ -26,6 +26,14 @@
         </p>
         <p th:text="${space.spaceKey}"></p>
     </div>
+    <div>
+        <div th:each="page : ${spacePages}">
+            <div>
+                <p th:text="${page.title}"></p>
+                <p th:text="${page.id}"></p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script type="text/javascript">
